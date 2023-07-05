@@ -1,10 +1,12 @@
 package com.educandoweb.Course.entities.pk;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 
 import com.educandoweb.Course.entities.Order;
 import com.educandoweb.Course.entities.Product;
+
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -26,10 +28,12 @@ public class OrderItemPk implements Serializable {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
+	
 	public Order getOrder() {
 		return order;
 	}
 
+	
 	public void setOrder(Order order) {
 		this.order = order;
 	}

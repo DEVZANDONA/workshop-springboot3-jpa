@@ -125,5 +125,13 @@ public class Order implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", moment=" + moment + ", client=" + client + "]";
 	}
+	
+	public Double getTotal() {
+		Double total = 0.0;
+		for(OrderItem o : items) {
+			total += o.getSubTotal();
+		}
+		return total;
+	}
 
 }

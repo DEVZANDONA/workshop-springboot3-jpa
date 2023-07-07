@@ -94,7 +94,8 @@ public class OrderItem implements Serializable {
 		return "OrderItem [id=" + id + ", quantity=" + quantity + ", price=" + price + "]";
 	}
 
-	public Double subTotal() {
+	
+	public Double getSubTotal() {
 		return price * quantity;
 	}
 

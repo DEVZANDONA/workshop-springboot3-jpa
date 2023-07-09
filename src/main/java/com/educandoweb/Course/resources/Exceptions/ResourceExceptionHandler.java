@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.educandoweb.Course.Services.Exceptions.DataBaseException;
 import com.educandoweb.Course.Services.Exceptions.ResourceNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,5 +25,18 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
+	
+	
+	@ExceptionHandler(DataBaseException.class) //Essa anotation fala que esse método vai intercepta uma excessao da classe ResouceNot...
+	public ResponseEntity<StandardError> datanase(DataBaseException e, HttpServletRequest request){
+		String error = "data base error";
+		//Qual vai ser o status da resposta que deu essa excessão?
+		HttpStatus status =  HttpStatus.BAD_REQUEST;
+		
+		//Criando o objeto erro
+		StandardError err = new StandardError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
 	
 }

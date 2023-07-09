@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.Course.Services.Exceptions.ResourceNotFoundException;
 import com.educandoweb.Course.entities.User;
 import com.educandoweb.Course.repositories.UserRepository;
 
@@ -21,7 +22,9 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		
+		//Esse método tenta dar o .Get --> Se nao der lança uma excessao
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
 	public User insert(User obj) {
@@ -41,7 +44,7 @@ public class UserService {
 
 	private void updateData(User entity, User user) {
 		entity.setName(user.getName());
-		entity.setEmail(user.getPhone());
+		entity.setEmail(user.getEmail ());
 		entity.setPhone(user.getPhone());	
 	}
 
